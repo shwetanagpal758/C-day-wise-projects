@@ -1,42 +1,38 @@
-﻿using System;
-namespace shweta
+﻿namespace MySuperBank
 {
-    class Program
-    {
-        public static void Main (string[] args)
-        {
-            var account= new bankaccount("shweta", 1000);
-            Console.WriteLine($"account{account.number} was created for{account.owner} with {account.balance}. ");
+        class Program {
+
+            static void Main(string[] args){
+                var account = new BankAccount("kendra", 10000);
+                Console.WriteLine($"Account {account.Number} was created for {account.Owner} with {account.Balance}.");
+
+                account.MakeWithdrawal(120, DateTime.Now, "Ashu");
+                Console.WriteLine(account.Balance);
+
+                Console.WriteLine(account.GetAccountHistory());
+
+                //Test for a negative balance:
+                try{
+                    account.MakeWithdrawal(75000, DateTime.Now, "Attempt to overdraw");
+                }
+                catch(InvalidOperationException e)
+                {
+                    Console.WriteLine("Exception caught trying to overdraw");
+                    Console.WriteLine(e.ToString());
+                }
+                //Test that the initial balances must be positive.
+                try{
+                    var invalidAccount = new BankAccount("invalid", -55);
+                }
+                catch (ArgumentOutOfRangeException e)
+                {
+                    Console.WriteLine("Exception caught creating account with negative balance");
+                    Console.WriteLine(e.ToString());
+                }
+                account.MakeWithdrawal(100, DateTime.Now, "Abc");
+                Console.WriteLine(account.Balance);
+
+
+            }
         }
-    }
 }
-// using System;
-// namespace shweta
-// {
-//     class Program
-//     {
-//         public static async Task Main (string[] args)
-//         {
-//             var account= bankaccount("shweta",1000);
-//             Console.WriteLine($"account(account.number) was created for(account.owner) with (account.balance). ");
-//         }
-
-        
-//     }
-// }
-
-
-// using System;
-// namespace shweta
-// {
-//     // class Abc
-//     // {
-//     //     static void Main (string[] args)
-//     //     {
-//     // string afriend = "bill";
-//     // Console.WriteLine(afriend);
-//     // Console.WriteLine("hello");
-//     // Console.WriteLine("hi" + afriend);
-//     //     }
-//     }    
-// }    
